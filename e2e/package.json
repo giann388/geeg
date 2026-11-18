@@ -1,0 +1,13 @@
+{
+  "name": "certificate-registry-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "description": "E2E UI test opsional (Chrome headless + MetaMask tiruan)",
+  "scripts": {
+    "test": "node e2e.js"
+  },
+  "devDependencies": {
+    "ethers": "^6.17.0",
+    "puppeteer-core": "^23.11.1"
+  }
+}

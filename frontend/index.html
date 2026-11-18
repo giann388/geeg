@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Verifikasi Sertifikat - Certificate Registry</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="inner">
+      <div class="brand">Certificate Registry</div>
+      <nav>
+        <a href="index.html" class="active">Verifikasi</a>
+        <a href="issuer.html">Issuer</a>
+        <a href="admin.html">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Verifikasi Sertifikat</h1>
+
+    <div class="grid-2">
+      <section class="card">
+        <h2>1. Pilih file sertifikat (PDF)</h2>
+        <label class="dropzone" id="dropzone" for="pdf-input">
+          <input type="file" id="pdf-input" accept="application/pdf,.pdf" />
+          <div><strong>Klik untuk memilih</strong> atau seret file PDF ke sini</div>
+          <div class="hint">Maksimal 10 MB</div>
+        </label>
+        <div id="file-info" class="hint" style="margin-top:10px"></div>
+
+        <details style="margin-top:16px">
+          <summary class="hint">Atau verifikasi dengan hash (opsional)</summary>
+          <label for="hash-input">Hash SHA-256</label>
+          <input type="text" id="hash-input" placeholder="0x…64 karakter hex" />
+          <div class="actions"><button id="hash-btn" class="secondary">Cek hash</button></div>
+        </details>
+      </section>
+
+      <section class="card">
+        <h2>2. Hasil verifikasi</h2>
+        <div id="result" class="result neutral">
+          <div class="title">Belum ada file</div>
+          <div class="hint">Hasil akan muncul di sini: VALID, DICABUT, atau TIDAK DITEMUKAN.</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="/vendor/ethers.umd.min.js"></script>
+  <script src="js/contract-config.js"></script>
+  <script src="js/hash.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/verify.js"></script>
+</body>
+</html>

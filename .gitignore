@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+
+# Rahasia & konfigurasi lokal - JANGAN di-commit
+# (.env.example TETAP di-commit: hanya berisi placeholder, tanpa rahasia asli)
+.env
+*.env
+.env.*
+!.env.example
+*.pem
+*.key
+# Backup database bisa berisi data pribadi mahasiswa
+*.sql.bak
+backup*.sql
+
+# Hardhat
+blockchain/artifacts/
+blockchain/cache/
+blockchain/coverage/
+blockchain/coverage.json
+blockchain/typechain-types/
+blockchain/deployments/
+blockchain/hardhat.sandbox.config.js
+
+# File hasil deploy (dibuat ulang oleh npm run deploy:local)
+backend/src/contract-config.json
+frontend/js/contract-config.js
+
+# E2E
+e2e/screenshots/
+
+# Lain-lain
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+npm-debug.log*

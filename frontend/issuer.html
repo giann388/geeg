@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Issuer Dashboard - Certificate Registry</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="inner">
+      <div class="brand">Certificate Registry</div>
+      <nav>
+        <a href="index.html">Verifikasi</a>
+        <a href="issuer.html" class="active">Issuer</a>
+        <a href="admin.html">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Issuer Dashboard</h1>
+
+    <section class="card">
+      <div class="wallet-bar">
+        <div class="wallet-info" id="wallet-info"><span class="hint">Wallet belum terhubung.</span></div>
+        <div>
+          <button id="connect-btn">Hubungkan MetaMask &amp; Login</button>
+          <button id="disconnect-btn" class="secondary hidden">Putuskan</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="not-issuer" class="notice bad hidden"></div>
+
+    <div id="issuer-area" class="hidden">
+      <section class="card">
+        <h2>Terbitkan Sertifikat Baru</h2>
+        <form id="issue-form" autocomplete="off">
+          <div class="grid-2">
+            <div>
+              <label>File sertifikat (PDF)</label>
+              <label class="dropzone" id="dropzone" for="pdf-input">
+                <input type="file" id="pdf-input" accept="application/pdf,.pdf" />
+                <div><strong>Klik untuk memilih</strong> atau seret PDF ke sini</div>
+                <div class="hint">Maks. 10 MB. File tidak diunggah, hanya hash-nya yang dipakai.</div>
+              </label>
+              <div id="pdf-info" class="hint" style="margin-top:8px"></div>
+              <div class="notice info" style="margin-top:12px">
+                Mahasiswa harus menyimpan <strong>file PDF yang persis sama</strong> dengan yang Anda pilih di sini. Jika file diubah atau dibuat ulang, hash-nya berubah dan verifikasi akan gagal.
+              </div>
+            </div>
+            <div>
+              <label for="f-name">Nama mahasiswa</label>
+              <input type="text" id="f-name" required />
+              <label for="f-nim">NIM</label>
+              <input type="text" id="f-nim" required />
+              <label for="f-course">Mata kuliah / program</label>
+              <input type="text" id="f-course" required />
+              <label for="f-grade">Nilai</label>
+              <input type="text" id="f-grade" placeholder="A, B+, atau 85.5" required />
+              <label for="f-date">Tanggal sertifikat</label>
+              <input type="date" id="f-date" required />
+            </div>
+          </div>
+          <div class="actions"><button type="submit" id="issue-btn">Terbitkan Sertifikat</button></div>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="wallet-bar">
+          <h2>Sertifikat Saya</h2>
+          <button class="secondary small" id="refresh-btn">Muat ulang</button>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Hash</th><th>Mahasiswa</th><th>Mata kuliah / nilai</th><th>Status</th><th>Aksi</th></tr>
+          </thead>
+          <tbody id="cert-rows"><tr><td colspan="5" class="empty">Memuat…</td></tr></tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+
+  <dialog id="edit-dialog">
+    <h2 id="edit-title">Edit data sertifikat</h2>
+    <form id="edit-form" method="dialog" autocomplete="off">
+      <div class="hint mono" id="edit-hash"></div>
+      <label for="e-name">Nama mahasiswa</label>
+      <input type="text" id="e-name" required />
+      <label for="e-nim">NIM</label>
+      <input type="text" id="e-nim" required />
+      <div class="hint">Jika NIM diubah, kode penerima di blockchain juga diperbarui lewat updateMetadata() (butuh konfirmasi MetaMask).</div>
+      <label for="e-course">Mata kuliah / program</label>
+      <input type="text" id="e-course" required />
+      <label for="e-grade">Nilai</label>
+      <input type="text" id="e-grade" required />
+      <label for="e-date">Tanggal sertifikat</label>
+      <input type="date" id="e-date" required />
+      <div class="actions">
+        <button type="submit" id="edit-save">Simpan</button>
+        <button type="button" class="secondary" id="edit-cancel">Batal</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="/vendor/ethers.umd.min.js"></script>
+  <script src="js/contract-config.js"></script>
+  <script src="js/hash.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/issuer.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard - Certificate Registry</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="inner">
+      <div class="brand">Certificate Registry</div>
+      <nav>
+        <a href="index.html">Verifikasi</a>
+        <a href="issuer.html">Issuer</a>
+        <a href="admin.html" class="active">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Admin Dashboard</h1>
+
+    <section class="card">
+      <div class="wallet-bar">
+        <div class="wallet-info" id="wallet-info"><span class="hint">Wallet belum terhubung.</span></div>
+        <div>
+          <button id="connect-btn">Hubungkan MetaMask &amp; Login</button>
+          <button id="disconnect-btn" class="secondary hidden">Putuskan</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="not-admin" class="notice bad hidden"></div>
+
+    <div id="admin-area" class="hidden">
+      <section class="card">
+        <h2>Tambah Issuer</h2>
+        <form id="add-form" autocomplete="off">
+          <div class="grid-2">
+            <div>
+              <label for="issuer-address">Alamat wallet issuer</label>
+              <input type="text" id="issuer-address" placeholder="0x…" required />
+            </div>
+            <div>
+              <label for="issuer-name">Nama tampilan</label>
+              <input type="text" id="issuer-name" placeholder="Dr. Andi Wijaya" required />
+              <label for="issuer-inst">Institusi</label>
+              <input type="text" id="issuer-inst" placeholder="Fakultas Ilmu Komputer" required />
+            </div>
+          </div>
+          <div class="actions"><button type="submit" id="add-btn">Tambah Issuer</button></div>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="wallet-bar">
+          <h2>Daftar Issuer</h2>
+          <button class="secondary small" id="refresh-issuers">Muat ulang</button>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Wallet</th><th>Nama / Institusi</th><th>Status on-chain</th><th>Aksi</th></tr>
+          </thead>
+          <tbody id="issuer-rows"><tr><td colspan="4" class="empty">Memuat…</td></tr></tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <div class="wallet-bar">
+          <h2>Semua Sertifikat (pemantauan)</h2>
+          <button class="secondary small" id="refresh-certs">Muat ulang</button>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Hash</th><th>Issuer</th><th>Mahasiswa</th><th>Status</th><th>Aksi</th></tr>
+          </thead>
+          <tbody id="cert-rows"><tr><td colspan="5" class="empty">Memuat…</td></tr></tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+
+  <dialog id="profile-dialog">
+    <h2>Edit profil issuer</h2>
+    <form id="profile-form" method="dialog" autocomplete="off">
+      <div class="hint mono" id="profile-address"></div>
+      <label for="profile-name">Nama tampilan</label>
+      <input type="text" id="profile-name" required />
+      <label for="profile-inst">Institusi</label>
+      <input type="text" id="profile-inst" required />
+      <div class="actions">
+        <button type="submit" id="profile-save">Simpan</button>
+        <button type="button" class="secondary" id="profile-cancel">Batal</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="/vendor/ethers.umd.min.js"></script>
+  <script src="js/contract-config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
